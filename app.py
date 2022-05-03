@@ -1,4 +1,5 @@
 import json
+import os
 
 from flask import Flask
 from flask_socketio import SocketIO, emit
@@ -20,6 +21,9 @@ mysql = MySQL(app)
 active_users = {}
 messages = []
 
+@app.route('/port')
+def port():
+    return  json.dumps(int(os.environ.get('PORT')))
 
 @app.route('/')
 def serve_static_index():
@@ -100,3 +104,7 @@ def on_chat_sent(data):
     cursor.execute(sql, (data['room'], data['sender'], data['receiver'], data['sent'], data['message']))
     mysql.connection.commit()
     cursor.close()
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT'))
+    app.run(port=port, host='0.0.0.0')

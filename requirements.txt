@@ -2,7 +2,7 @@ bidict==0.22.0
 cffi==1.15.0
 click==8.1.2
 colorama==0.4.4
-dnspython==2.2.1
+dnspython==2.0.0
 eventlet==0.30.2
 Flask==2.1.1
 Flask-Cors==3.0.10

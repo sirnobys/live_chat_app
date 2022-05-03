@@ -21,9 +21,11 @@ mysql = MySQL(app)
 active_users = {}
 messages = []
 
+
 @app.route('/port')
 def port():
-    return  json.dumps(int(os.environ.get('PORT')))
+    return json.dumps(int(os.environ.get('PORT')))
+
 
 @app.route('/')
 def serve_static_index():
@@ -104,6 +106,7 @@ def on_chat_sent(data):
     cursor.execute(sql, (data['room'], data['sender'], data['receiver'], data['sent'], data['message']))
     mysql.connection.commit()
     cursor.close()
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT'))
